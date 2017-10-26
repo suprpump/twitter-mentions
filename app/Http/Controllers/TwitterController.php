@@ -33,6 +33,7 @@ class TwitterController extends Controller
          */
         $twitter = app()->make('twitter_api');
 
+        // user and tweets for 60 minutes
         $twitter_accounts = \Cache::remember(sprintf('tweets-by-user::%s', $user), 60, function() use ($twitter, $user) {
 
             return $twitter->searchTweets($user);
@@ -55,11 +56,10 @@ class TwitterController extends Controller
          */
         $twitter = app()->make('twitter_api');
 
-
+        // cache user profile for 60 minutes
         $twitter_user = \Cache::remember(sprintf('twitter-user-profile::%s', $user), 60, function() use ($twitter, $user) {
 
              return $twitter->searchUser($user);
-
         });
 
         return response()->json($twitter_user);

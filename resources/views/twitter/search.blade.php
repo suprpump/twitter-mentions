@@ -28,13 +28,11 @@
                         <td > Count </td>
                         <td > Recent Tweets</td>
                     </tr>
-
                     @if(isset($twitter_accounts))
                         @foreach($twitter_accounts as $account)
                             <tr>
                                 <td class="align-middle">
                                     <p>{{$account['user']}}</p>
-
                                     <button class="btn-sm btn-secondary btn-analyze" >Analyze</button>
                                 </td >
                                 <td class="align-middle">{{$account['count']}}</td>
@@ -52,7 +50,6 @@
                 </table>
             </div>
         </div>
-
     </div>
 
     @include('twitter.user_profile_modal')
@@ -74,15 +71,12 @@
                 success: function( response ) {
                     var json = $.parseJSON(response);
                     console.log(json);
-
                     $("#twitter-screen-name").text(json.screen_name);
                     $("#twitter-name").text(json.name);
                     $("#twitter-location").text(json.location);
                     $("#twitter-statuses").text(json.statuses_count);
                     $("#twitter-followers").text(json.followers_count);
                     $("#twitter-friends").text(json.friends_count);
-
-
                     $("#myModal").modal("toggle");
                 }
             });

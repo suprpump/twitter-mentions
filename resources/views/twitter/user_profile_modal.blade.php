@@ -11,7 +11,6 @@
                 </button>
             </div>
             <div class="modal-body">
-
                 <div class="row">
                     <div class="col-sm-4">Screen Name:</div>
                     <div align="left" class="col-sm-8" id="twitter-screen-name"></div>
@@ -37,7 +36,6 @@
                     <div class="col-sm-8" id="twitter-friends"></div>
                 </div>
                 <div class="row">
-
                 </div>
             </div>
             <div class="modal-footer">
@@ -46,6 +44,5 @@
         </div>
     </div>
 </div>
-{{--@include('layouts.errors')--}}
 
 
