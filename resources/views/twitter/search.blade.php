@@ -72,12 +72,16 @@
                 },
                 data: { username: user.text()},
                 success: function( response ) {
-//                    console.log(response);
                     var json = $.parseJSON(response);
-                    console.log(json.name);
-//                    json.forEach(function(value, index) {
-//                        console.log(value);
-//                    });
+                    console.log(json);
+
+                    $("#twitter-screen-name").text(json.screen_name);
+                    $("#twitter-name").text(json.name);
+                    $("#twitter-location").text(json.location);
+                    $("#twitter-statuses").text(json.statuses_count);
+                    $("#twitter-followers").text(json.followers_count);
+                    $("#twitter-friends").text(json.friends_count);
+
 
                     $("#myModal").modal("toggle");
                 }

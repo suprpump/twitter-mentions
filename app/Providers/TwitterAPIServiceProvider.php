@@ -72,7 +72,7 @@ class  TwitterAPIServiceProvider extends ServiceProvider
         $search_response = [];
 
         $url = sprintf('https://api.twitter.com/1.1/users/show.json?screen_name=%s', $user);
-
+        $json = null;
         $this->client->requestAsync('GET', $url, [
             'headers' => [
                 'Host' => 'api.twitter.com',
@@ -80,13 +80,14 @@ class  TwitterAPIServiceProvider extends ServiceProvider
                 'Authorization' => $this->authorization_header,
                 'Accept-Encoding' => 'gzip',
             ]
-        ])->then(function ($response) use (&$user, &$search_response, &$empty_search) {
+        ])->then(function ($response) use (&$user, &$json) {
             if ($response->getStatusCode() !== 200)
                 \Log::error(sprintf('Failed to search user %s' , $user));
-            // decode the data
-            $json_obj =  json_decode($response->getBody()->getContents(), true);
 
-            $search_response[] = $json_obj;
+
+            $json =  $response->getBody()->getContents();
+
+//            $search_response[] = $json_obj;
         },
             function (GuzzleHttp\Exception\GuzzleException $e) {
                 \Log::error($e->getMessage() . "\n");
@@ -94,8 +95,7 @@ class  TwitterAPIServiceProvider extends ServiceProvider
             }
         )->wait();
 
-
-        return collect($search_response)->toJson();
+        return $json;
     }
 
 

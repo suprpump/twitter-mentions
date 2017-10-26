@@ -55,19 +55,18 @@ class TwitterController extends Controller
          */
         $twitter = app()->make('twitter_api');
 
-        $twitter_user = $twitter->searchUser($user);
 
-//        $returnHTML = view('search')->render();
-//        $returnHTML = view('twitter.search')->with('user', $twitter_user)->render();
+        $twitter_user = \Cache::remember(sprintf('twitter-user-profile::%s', $user), 60, function() use ($twitter, $user) {
+
+             return $twitter->searchUser($user);
+
+        });
+
         return response()->json($twitter_user);
 
-//        return view('twitter.search');
     }
 
-    public function getUserProfile($data)
-    {
 
-    }
 
 
 }
